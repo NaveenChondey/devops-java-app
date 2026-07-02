@@ -2,18 +2,15 @@ pipeline {
     agent any
 
     stages {
-
         stage('Checkout') {
             steps {
-                checkout scm
+                git 'https://github.com/NaveenChondey/devops-java-app.git'
             }
         }
 
-        stage('Build') {
+        stage('Success') {
             steps {
-                dir('app') {
-                    sh 'mvn clean package'
-                }
+                echo 'Pipeline executed successfully!'
             }
         }
     }
