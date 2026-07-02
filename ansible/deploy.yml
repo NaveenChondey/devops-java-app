@@ -1,0 +1,21 @@
+---
+- hosts: web
+  become: yes
+
+  tasks:
+
+    - name: Pull latest Docker image
+      shell: docker pull your-dockerhub-username/java-app:latest
+
+    - name: Stop old container
+      shell: docker stop java-app || true
+
+    - name: Remove old container
+      shell: docker rm java-app || true
+
+    - name: Run new container
+      shell: |
+        docker run -d \
+        --name java-app \
+        -p 8080:8080 \
+        your-dockerhub-username/java-app:latest
